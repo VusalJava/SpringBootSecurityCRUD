@@ -2,26 +2,13 @@ package com.example.springbootcrud.repository;
 
 
 import com.example.springbootcrud.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface UserDAO {
-
-    //create user
-    void createUser(User user);
-
-    //read users
-    List<User> readAllUsers();
-
-    User getUserById(Long id);
-
-    //delete user
-    void deleteById(Long id);
-
-    //update user
-    void update(User user);
-
-
-
-
+@Repository
+public interface UserDAO extends JpaRepository<User,Long> {
+    @Query(value = "select u from User u where u.login = :login")
+    User findByLogin(@Param("login") String login);
 }

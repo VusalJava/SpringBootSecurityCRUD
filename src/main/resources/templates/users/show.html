@@ -5,9 +5,12 @@
     <title>User</title>
 </head>
 <body>
-<p th:text="${'Name: ' + _user.getName()}">Value</p>
-<p th:text="${'Email: ' + _user.getMailAddress()}">Value</p>
 <p th:text="${'Id: ' + _user.getId()}">Value</p>
+<p th:text="${'Name: ' + _user.getName()}">Value</p>
+<p th:text="${'Last Name: ' + _user.getLastName()}">Value</p>
+<p th:text="${'Age: ' + _user.getAge()}">Value</p>
+<p th:text="${'Email: ' + _user.getEmailAddress()}">Value</p>
+<p th:text="${'Role: ' + _user.getAuthorities()}">Value</p>
 
 <a th:href="@{/users/{id}/edit(id=${_user.getId()})}">EDIT</a>
 

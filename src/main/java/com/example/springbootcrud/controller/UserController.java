@@ -1,6 +1,7 @@
 package com.example.springbootcrud.controller;
 
 import com.example.springbootcrud.domain.User;
+import com.example.springbootcrud.repository.RoleDAO;
 import com.example.springbootcrud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,14 +10,16 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
+    private final RoleDAO roleDAO;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, RoleDAO roleDAO) {
         this.userService = userService;
+        this.roleDAO = roleDAO;
     }
 
     @GetMapping()
