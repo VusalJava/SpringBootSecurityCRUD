@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 
 @Controller
 @RequestMapping("/user")
@@ -23,21 +25,12 @@ public class UserController {
     }
 
     @GetMapping()
-    public String printUsers(Model model){
-        model.addAttribute("_users",userService.readAllUsers());
-        return "users/list";
-    }
-
-    @GetMapping("/{id}")
-    public String showUser(@PathVariable("id") Long id, Model model){
-        model.addAttribute("_user",userService.getUserById(id));
+    public String showUser(Principal user, Model model){
+        model.addAttribute("_user",userService.getUserByLogin(user.getName()));
         return "users/show";
     }
+/*
 
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("_user") User user){
-        return "users/new";
-    }
 
     @PostMapping()
     public String createUser(@ModelAttribute("_user") User user){
@@ -61,7 +54,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Long id){
         userService.deleteById(id);
         return "redirect:/users";
-    }
+    }*/
 
 
 

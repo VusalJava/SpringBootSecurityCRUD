@@ -1,6 +1,8 @@
 package com.example.springbootcrud.service;
 
+import com.example.springbootcrud.domain.Role;
 import com.example.springbootcrud.domain.User;
+import com.example.springbootcrud.repository.RoleDAO;
 import com.example.springbootcrud.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +13,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO;
+    private final RoleDAO roleDAO;
 
     @Autowired
-    public UserServiceImpl(UserDAO userDAO) {
+    public UserServiceImpl(UserDAO userDAO, RoleDAO roleDAO) {
         this.userDAO = userDAO;
+        this.roleDAO = roleDAO;
     }
 
     @Transactional
@@ -22,11 +26,15 @@ public class UserServiceImpl implements UserService {
     public void createUser(User user) {
         userDAO.save(user);
     }
-
     @Transactional
     @Override
     public void update(User user) {
         userDAO.save(user);
+    }
+
+    @Override
+    public List<Role> readAllRoles() {
+        return roleDAO.findAll();
     }
 
     @Override
@@ -49,4 +57,5 @@ public class UserServiceImpl implements UserService {
     public List<User> readAllUsers() {
         return userDAO.findAll();
     }
+
 }

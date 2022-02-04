@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -151,7 +152,6 @@ public class User implements UserDetails {
                 ", login='" + login + '\'' +
                 ", emailAddress='" + emailAddress + '\'' +
                 ", password='" + password + '\'' +
-                ", roles=" + roles +
                 '}';
     }
 
@@ -169,5 +169,21 @@ public class User implements UserDetails {
 
     public void addRole(Role role) {
         roles.add(role);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return age == user.age && id.equals(user.id)
+                && name.equals(user.name) && lastName.equals(user.lastName)
+                && login.equals(user.login) && emailAddress.equals(user.emailAddress)
+                && password.equals(user.password) && roles.equals(user.roles);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, age, login, emailAddress, password, roles);
     }
 }

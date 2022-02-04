@@ -30,7 +30,7 @@ class SpringBootCrudApplicationTests {
     @Test
     public void testCreateUser(){
         User user = new User();
-        //user.setId(7l);
+
         user.setName("Ruslan");
         user.setLastName("Ruslanov");
         user.setAge((byte) 30);
