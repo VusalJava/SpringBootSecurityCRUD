@@ -1,4 +1,4 @@
-package com.example.springbootcrud.domain;
+package com.example.springbootcrud.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -61,12 +61,12 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
-        return id.equals(role.id) && name.equals(role.name) && users.equals(role.users);
+        return id.equals(role.id) && name.equals(role.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, users);
+        return Objects.hash(id, name);
     }
 
     @Override

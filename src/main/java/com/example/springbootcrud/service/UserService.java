@@ -1,7 +1,7 @@
 package com.example.springbootcrud.service;
 
-import com.example.springbootcrud.domain.Role;
-import com.example.springbootcrud.domain.User;
+import com.example.springbootcrud.model.Role;
+import com.example.springbootcrud.model.User;
 import java.util.List;
 
 public interface UserService {
@@ -22,6 +22,4 @@ public interface UserService {
     //update user
     void update(User user);
 
-    //read roles
-    List<Role> readAllRoles();
 }

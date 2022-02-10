@@ -31,8 +31,8 @@
         <td th:text="${user.login}">Login</td>
         <td th:text="${user.roles}">Roles</td>
         <td>
-            <a th:href="@{/admin/edit/{id}(id=${user.getId()})}">Edit</a>
-            <a th:href="@{/admin}" th:method="DELETE" th:action="@{/admin}">Delete</a>
+            <a th:href="@{/admin/user/edit/{id}(id=${user.getId()})}">Edit</a>
+            <a th:href="@{/admin/user/delete/{id}(id=${user.getId()})}" class="btn btn-danger">Delete</a>
         </td>
     </tr>
     </tbody>
@@ -40,7 +40,10 @@
 </div>
 <br>
 
-<a href="admin/new">CREATE NEW USER</a>
+<a href="admin/user/new">CREATE NEW USER</a>
+<br>
+<br>
+<a href="/logout">Logout</a>
 
 </body>
 </html>

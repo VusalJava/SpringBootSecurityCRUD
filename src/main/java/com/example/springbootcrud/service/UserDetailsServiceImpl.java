@@ -1,9 +1,7 @@
 package com.example.springbootcrud.service;
 
-import com.example.springbootcrud.domain.Role;
-import com.example.springbootcrud.domain.User;
-import com.example.springbootcrud.repository.RoleDAO;
-import com.example.springbootcrud.repository.UserDAO;
+import com.example.springbootcrud.model.User;
+import com.example.springbootcrud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,16 +11,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userDAO.findByLogin(login);
+        User user = userRepository.findByLogin(login);
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }

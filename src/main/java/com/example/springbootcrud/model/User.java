@@ -1,9 +1,10 @@
-package com.example.springbootcrud.domain;
+package com.example.springbootcrud.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +12,8 @@ import java.util.Set;
 @Entity
 @Table(name = "users1")
 public class User implements UserDetails {
-    @Id()
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

@@ -1,7 +1,6 @@
 package com.example.springbootcrud.controller;
 
-import com.example.springbootcrud.domain.User;
-import com.example.springbootcrud.repository.RoleDAO;
+import com.example.springbootcrud.repository.RoleRepository;
 import com.example.springbootcrud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,47 +15,18 @@ import java.security.Principal;
 public class UserController {
 
     private final UserService userService;
-    private final RoleDAO roleDAO;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserController(UserService userService, RoleDAO roleDAO) {
+    public UserController(UserService userService, RoleRepository roleRepository) {
         this.userService = userService;
-        this.roleDAO = roleDAO;
+        this.roleRepository = roleRepository;
     }
 
     @GetMapping()
-    public String showUser(Principal user, Model model){
-        model.addAttribute("_user",userService.getUserByLogin(user.getName()));
+    public String showUser(Principal user, Model model) {
+        model.addAttribute("_user", userService.getUserByLogin(user.getName()));
         return "users/show";
+
     }
-/*
-
-
-    @PostMapping()
-    public String createUser(@ModelAttribute("_user") User user){
-        userService.createUser(user);
-        return "redirect:/users";
-    }
-
-    @GetMapping("/{id}/edit")
-    public String editUser(@PathVariable("id") Long id,Model model){
-        model.addAttribute("_user",userService.getUserById(id));
-        return "users/edit";
-    }
-
-    @PatchMapping("/{id}")
-    public String updateUser(@ModelAttribute("_user") User user){
-        userService.update(user);
-        return "redirect:/users";
-    }
-
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable("id") Long id){
-        userService.deleteById(id);
-        return "redirect:/users";
-    }*/
-
-
-
-
 }
