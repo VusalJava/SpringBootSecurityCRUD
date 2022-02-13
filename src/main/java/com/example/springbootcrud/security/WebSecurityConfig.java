@@ -26,10 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-/*     @Autowired
-    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider()); // конфигурация для прохождения аутентификации
-    }*/
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -67,12 +63,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login")
                 .and().csrf().disable();
 
-/*                .and()
-                .formLogin()
-                .successHandler(successUserHandler)
-                .and()
-                .logout()
-                .and().csrf().disable();*/
     }
 }
 

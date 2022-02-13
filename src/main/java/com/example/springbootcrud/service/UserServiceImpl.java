@@ -52,8 +52,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void deleteById(Long id) {
+/*
         User user = userRepository.findById(id).orElse(null);
-        Set<Role> roles = user.getRoles();
+       Set<Role> roles = user.getRoles();
         while (roles.iterator().hasNext()){
             Role role = roles.iterator().next();
             List<User> users = role.getUsers();
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
             roles.remove(role);
         }
         user.setRoles(roles);
-        userRepository.save(user);
+        userRepository.save(user);*/
         userRepository.deleteById(id);
     }
 

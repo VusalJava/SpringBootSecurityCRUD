@@ -32,13 +32,13 @@
     <input type="password" th:field="*{password}" id="password">
     <br>
     <br>
-    <th:block th:each="role: ${roleList}">
-        <label for="role"> Enter role(s):
-            <input type="checkbox"  th:field="*{roles}" id="role"
-                   th:value="${role.id}"
-                   th:text="${role.id}"/>
-        </label>
-    </th:block>
+    <label for="role"> Enter role(s):
+        <th:block th:each="role: ${roleList}">
+                <input type="checkbox"  th:field="*{roles}" id="role"
+                       th:value="${role.id}"
+                       th:text="${role.name.substring(5)}"/>
+        </th:block>
+    </label>
     <br>
     <br/>
     <input type="submit" value="SAVE"/>

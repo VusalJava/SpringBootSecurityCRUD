@@ -32,7 +32,10 @@
         <td th:text="${user.roles}">Roles</td>
         <td>
             <a th:href="@{/admin/user/edit/{id}(id=${user.getId()})}">Edit</a>
-            <a th:href="@{/admin/user/delete/{id}(id=${user.getId()})}" class="btn btn-danger">Delete</a>
+            <form th:method="DELETE" th:action="@{/admin/user/delete/{id}(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form>
+            <!--<a th:href="@{/admin/user/delete/{id}(id=${user.getId()})}" class="btn btn-danger">Delete</a>-->
         </td>
     </tr>
     </tbody>
