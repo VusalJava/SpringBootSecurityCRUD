@@ -4,11 +4,14 @@ import com.example.springbootcrud.model.Role;
 import com.example.springbootcrud.model.User;
 import com.example.springbootcrud.service.RoleService;
 import com.example.springbootcrud.service.UserService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -24,40 +27,36 @@ public class AdminController {
     }
 
     @GetMapping()
-    public String listUsers(Model model){
+    public String listUsers(Model model, Authentication authentication){
+        model.addAttribute("userAuthorized", authentication.getPrincipal());
         model.addAttribute("_users",userService.readAllUsers());
+        model.addAttribute("newUser",new User());
+        model.addAttribute("roleList",roleService.readAllRoles());
 
-        return "admin/list";
+        return "admin/admin-page";
     }
 
-    @GetMapping("/user/edit/{id}")
-    public String edit(@PathVariable("id") Long id,Model model){
-        User user = userService.getUserById(id);
-        List<Role> roleList = roleService.readAllRoles();
-        model.addAttribute("user",user);
-        model.addAttribute("roleList",roleList);
 
-        return "admin/edit";
-    }
-
-    @PatchMapping("")
-    public String updateUser(User user){
+    @PatchMapping("/user/edit/{id}")
+    public String updateUser(@ModelAttribute("user") User user,@RequestParam("idRoles") List<Long> idRoles){
+        Set<Role> roleSet = new HashSet<>();
+        for (Long idRole : idRoles) {
+            roleSet.add(roleService.findRoleById(idRole));
+        }
+        user.setRoles(roleSet);
         userService.update(user);
 
         return "redirect:/admin";
     }
 
-    @GetMapping("/user/new")
-    public String newForm(User user,Model model){
-        List<Role> roleList = roleService.readAllRoles();
-        model.addAttribute("user",user);
-        model.addAttribute("roleList",roleList);
-
-        return "admin/new";
-    }
 
     @PostMapping("/user/new")
-    public String create(@ModelAttribute("user") User user){
+    public String create(@ModelAttribute("user") User user,@RequestParam("idRoles") List<Long> idRoles){
+        Set<Role> roleSet = new HashSet<>();
+        for (Long idRole : idRoles) {
+            roleSet.add(roleService.findRoleById(idRole));
+        }
+        user.setRoles(roleSet);
         userService.createUser(user);
 
         return "redirect:/admin";

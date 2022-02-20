@@ -35,9 +35,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void update(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
 
     @Override
     public User getUserById(Long id) {
@@ -52,19 +52,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void deleteById(Long id) {
-/*
-        User user = userRepository.findById(id).orElse(null);
-       Set<Role> roles = user.getRoles();
-        while (roles.iterator().hasNext()){
-            Role role = roles.iterator().next();
-            List<User> users = role.getUsers();
-            users.remove(user);
-            role.setUsers(users);
-            roleRepository.save(role);
-            roles.remove(role);
-        }
-        user.setRoles(roles);
-        userRepository.save(user);*/
         userRepository.deleteById(id);
     }
 
